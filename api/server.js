@@ -3,26 +3,23 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
-
-// Middlewares
 app.use(express.json());
 app.use(cors());
 
-// Routes
+// ✅ Route check
 app.get("/", (req, res) => {
   res.send("✅ E-commerce backend running successfully on Vercel 🚀");
 });
 
-// Database connection
-const connectDB = async () => {
+const startServer = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("✅ MongoDB connected successfully");
   } catch (error) {
-    console.error("❌ Database connection failed:", error.message);
+    console.error("❌ MongoDB connection failed:", error.message);
   }
 };
 
-connectDB();
+startServer();
 
-module.exports = app; // ✅ Required by Vercel
+module.exports = app; // ✅ For Vercel
